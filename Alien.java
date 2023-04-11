@@ -2,13 +2,11 @@ import java.util.ArrayList;
 
 public class Alien implements Contract {
 
-    String name;
     ArrayList<String> inventory = new ArrayList<String>();
     ArrayList<String> viableItems = new ArrayList<String>();
     ArrayList<String> nonViableItems = new ArrayList<String>();
 
-    public Alien(String name) {
-        this.name = name;
+    public Alien() {
         inventory = new ArrayList<String>();
         viableItems = new ArrayList<String>();
         nonViableItems = new ArrayList<String>();
@@ -23,9 +21,9 @@ public class Alien implements Contract {
             viableItems.add(item);
         }
         if (inventory.contains(item)) {
-            throw new RuntimeException(this.name + " has already been brought aboard the mothership.");
+            throw new RuntimeException("The " + item + " has already been brought aboard the mothership.");
         }
-        System.out.println(this.name + " turns on her spaceship's beam and picks up the " + item + ".");
+        System.out.println("The alien turns on her spaceship's beam and picks up the " + item + ".");
         inventory.add(item);
         System.out.println("The " + item + " has been successfully brought aboard the mothership.");
     }
@@ -37,7 +35,7 @@ public class Alien implements Contract {
         if (!inventory.contains(item)) {
             throw new RuntimeException(item + " is not currently aboard the mothership.");
         }
-        System.out.println(this.name + " opens up the hatch on the floor of her spaceship and drops the " + item + ".");
+        System.out.println("The alien opens up the hatch on the floor of her spaceship and drops the " + item + ".");
         inventory.remove(item);
         System.out.println("The " + item + " fell from the mothership and landed safely on the ground.");
         return item;
@@ -50,7 +48,7 @@ public class Alien implements Contract {
         if (!inventory.contains(item)) {
             throw new RuntimeException("The " + item + " is not currently aboard the mothership.");
         }
-        System.out.println(this.name + " opens up the hatch on the floor of her spaceship and drops the " + item + ".");
+        System.out.println("The alien opens up the hatch on the floor of her spaceship and drops the " + item + ".");
         inventory.remove(item);
         if (y >= 50) {
             System.out.println("The " + item + " fell from an incredible height and promptly broke on impact.");
@@ -68,13 +66,13 @@ public class Alien implements Contract {
             if (nonViableItems.contains(item)) {
                 System.out.println("This " + item + " is broken beyond recognition.");
             }
-            throw new RuntimeException("The " + item + " is not currently aboard the mothership. In order to examine the " + item + ", " + this.name + " must beam it up.");
+            throw new RuntimeException("The " + item + " is not currently aboard the mothership. In order to examine the " + item + ", the alien must beam it up.");
         }
         if (inventory.contains(item)) {
             if (viableItems.contains(item)) {
-                System.out.println("This " + item + " is the peak of quality. " + this.name + " could never ask for a better " + item + ". It has never been dropped from an incredible height and therefore is not broken.");
+                System.out.println("This " + item + " is the peak of quality. The alien could never ask for a better " + item + ". It has never been dropped from an incredible height and therefore is not broken.");
             }
-            System.out.println("Somehow, this is not a viable item. " + this.name + " is not sure what is wrong.");
+            System.out.println("Somehow, this is not a viable item. The alien is not sure what is wrong.");
         }
     }
 
