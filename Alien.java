@@ -2,11 +2,19 @@ import java.util.ArrayList;
 
 public class Alien implements Contract {
 
-    ArrayList<String> inventory = new ArrayList<String>();
-    ArrayList<String> viableItems = new ArrayList<String>();
-    ArrayList<String> nonViableItems = new ArrayList<String>();
+    public int size;
+    public int x;
+    public int y;
+    public boolean insideShip;
+    public ArrayList<String> inventory = new ArrayList<String>();
+    public ArrayList<String> viableItems = new ArrayList<String>();
+    public ArrayList<String> nonViableItems = new ArrayList<String>();
 
     public Alien() {
+        size = 1;
+        x = 0;
+        y = 0;
+        insideShip = true;
         inventory = new ArrayList<String>();
         viableItems = new ArrayList<String>();
         nonViableItems = new ArrayList<String>();
@@ -14,6 +22,12 @@ public class Alien implements Contract {
     }
 
     public void grab(String item) {
+        if (y == 0) {
+            throw new RuntimeException("The alien is so small that she has to be in her ship and off the ground in order to grab an item.");
+        }
+        if (insideShip == false) {
+            throw new RuntimeException("The alien is so small that she has to be in her ship and off the ground in order to grab an item.");
+        }
         if (nonViableItems.contains(item)) {
             throw new RuntimeException("The " + item + " is not able to be beamed up. It has already broken upon impact.");
         }
@@ -29,19 +43,6 @@ public class Alien implements Contract {
     }
 
     public String drop(String item) {
-        if (nonViableItems.contains(item)) {
-            throw new RuntimeException("The " + item + " is not able to be dropped. It has already broken upon impact.");
-        }
-        if (!inventory.contains(item)) {
-            throw new RuntimeException(item + " is not currently aboard the mothership.");
-        }
-        System.out.println("The alien opens up the hatch on the floor of her spaceship and drops the " + item + ".");
-        inventory.remove(item);
-        System.out.println("The " + item + " fell from the mothership and landed safely on the ground.");
-        return item;
-    }
-
-    public String drop(String item, int y) {
         if (nonViableItems.contains(item)) {
             throw new RuntimeException("The " + item + " is not able to be dropped. It has already broken upon impact.");
         }
@@ -89,11 +90,45 @@ public class Alien implements Contract {
     }
 
     public Number shrink() {
-
+        if (this.size <= 1) {
+            throw new RuntimeException("The alien mothership is already at its smallest possible size.");
+        }
+        System.out.println("The alien flips a switch on the dashboard, and the mothership lets out an incredible roar. The sound slowly pitches higher and higher, until the ship is half of it's previous size.");
+        this.size = this.size / 2;
+        return this.size;
     }
 
     public Number grow() {
+        if (this.size >= 128) {
+            throw new RuntimeException("The alien mothership is already at its maximum possible size.");
+        }
+        System.out.println("The alien flips a switch on the dashboard, and the mothership lets out an incredible roar. The sound slowly pitches lower and lower, until the ship is twice it's previous size.");
+        this.size = this.size * 2;
+        return this.size;
+    }
 
+    public boolean disembark() {
+        if (insideShip == false) {
+            throw new RuntimeException("The alien has already left the ship.");
+        }
+        if (!inventory.isEmpty()) {
+            throw new RuntimeException("In order to leave the ship, you must empty it. You may pick the same items back up later as long as they are not broken.");
+        }
+        if (y > 0){
+            throw new RuntimeException("In order to disembark the aircraft, the alien's ship must be on the ground.");
+        }
+        insideShip = false;
+        System.out.println("The alien presses the button on the dashboard that opens the ship's hatch. She disembarks.");
+        return insideShip;
+    }
+
+    public boolean embark() {
+        if (insideShip == true) {
+            throw new RuntimeException("The alien is already on the ship.");
+        }
+        insideShip = true;
+        System.out.println("The alien re-enters the aircraft and closes the hatch.");
+        return insideShip;
     }
 
     public void rest() {
