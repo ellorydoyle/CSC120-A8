@@ -71,7 +71,6 @@ public class Alien implements Contract {
         if (height >= 50) {
             System.out.println("The " + item + " fell from an incredible height and promptly broke on impact.");
             viableItems.remove(item);
-            inventory.remove(item);
             nonViableItems.add(item);
         }
         if (height < 50) {
@@ -257,6 +256,14 @@ public class Alien implements Contract {
     }
 
     public void undo() {
-        System.out.println("The alien pulls out her time gun from her handy dandy pouch that everyone from her species has. ");
+        System.out.println("The alien pulls out her time gun from her handy dandy pouch that everyone from her species has. She aims it at her head and pulls the trigger. When she comes to, she is seated in her control chair, in her aircraft, which is on the ground. All of the items she may have stashed in her ship are gone as well. Has she returned to the beginning?");
+        size = 1;
+        horizon = 0;
+        height = 0;
+        insideShip = true;
+        asleep = false;
+        airborne = false;
+        walking = false;
+        dashQuality = 100;
     }
 }
