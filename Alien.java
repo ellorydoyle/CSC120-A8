@@ -1,17 +1,32 @@
 import java.util.ArrayList;
 
+/** 
+ *  Class representing an Alien
+ *  The Alien class implements Contract.java
+ */
 public class Alien implements Contract {
 
+    /** How big is the spaceship? */
     public int size;
+    /** Where is the spaceship on a horizontal plane? */
     public int horizon;
+    /** Where is the spaceship on a vertical plane? */
     public int height;
+    /** Is the alien inside her spaceship? */
     public boolean insideShip;
+    /** Is the alien asleep? */
     public boolean asleep;
+    /** Is the spaceship airborne? */
     public boolean airborne;
+    /** Is the alien currently walking on the ground? */
     public boolean walking;
+    /** What is the quality of the dashboard in the ship? */
     public int dashQuality;
+    /** What items are onboard the ship? */
     public ArrayList<String> inventory = new ArrayList<String>();
+    /** What are the items that have not been damaged? */
     public ArrayList<String> viableItems = new ArrayList<String>();
+    /** What are the items that have been damaged? */
     public ArrayList<String> nonViableItems = new ArrayList<String>();
 
     public Alien() {
