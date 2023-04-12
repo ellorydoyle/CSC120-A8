@@ -29,6 +29,20 @@ public class Alien implements Contract {
     /** What are the items that have been damaged? */
     public ArrayList<String> nonViableItems = new ArrayList<String>();
 
+    /** 
+     *  Create an Alien with a size, location in space horizontally and vertically, whether or not she's inside her ship, whether or not she's asleep, whether or not she's airborne, whether or not she's walking, the quality of her ship's dash, her inventory, and the state of the items she has interacted with 
+     *  @param size The size of the alien and her spaceship
+     *  @param horizon Where the alien and her ship are on a horizontal plane
+     *  @param height Where the alien and her ship are on a vertical plane
+     *  @param insideShip Whether or not the alien is inside her ship
+     *  @param asleep   Whether or not the alien is asleep
+     *  @param airborne Whether or not the alien is airborne inside her ship
+     *  @param walking  Whether or not the alien is walking around on the ground
+     *  @param dashQuality  The quality of the dashboard in the alien's ship
+     *  @param inventory    The inventory of items that the alien has in her ship
+     *  @param viableItems  The items that the alien has interacted with that can still be interacted with
+     *  @param nonViableItems   The items that the alien has interacted with that can no longer be interacted with (broken)
+     */
     public Alien() {
         size = 1;
         horizon = 0;
@@ -43,7 +57,11 @@ public class Alien implements Contract {
         nonViableItems = new ArrayList<String>();
 
     }
-
+ 
+    /** 
+    *  Grab an item from the ground
+    *  @param item the item the alien is interacting with
+    */
     public void grab(String item) {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -68,6 +86,11 @@ public class Alien implements Contract {
         System.out.println("The " + item + " has been successfully brought aboard the mothership.");
     }
 
+    /** 
+    *  Drop an item back onto the ground
+    *  @param item the item the alien is interacting with
+    *  @return the item the alien interacted with
+    */
     public String drop(String item) {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -94,6 +117,10 @@ public class Alien implements Contract {
         return item;
     }
 
+    /** 
+    *  Examine an item in the alien's inventory
+    *  @param item the item the alien is interacting with
+    */
     public void examine(String item) {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -109,6 +136,10 @@ public class Alien implements Contract {
         }
     }
 
+    /** 
+    *  Use an item in the alien's inventory
+    *  @param item the item the alien is interacting with
+    */
     public void use(String item) {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -125,6 +156,11 @@ public class Alien implements Contract {
         }
     }
 
+    /** 
+    *  Make the alien walk on the ground
+    *  @param direction the direction the alien will be walking in
+    *  @return the fact that the alien is walking
+    */
     public boolean walk(String direction) {
         if (insideShip == true) {
             throw new RuntimeException("The alien is on the ship right now. She cannot walk around until she is off her ship.");
@@ -136,6 +172,10 @@ public class Alien implements Contract {
         return walking;
     }
 
+    /** 
+    *  Make the alien stop walking and return to her craft
+    *  @return the fact that the alien is no longer walking
+    */
     public boolean stopWalking() {
         if (insideShip == true) {
             throw new RuntimeException("The alien is on the ship right now. She wasn't walking around.");
@@ -148,6 +188,12 @@ public class Alien implements Contract {
         return walking;
     }
 
+    /** 
+    *  Make the alien fly around in her ship
+    *  @param x the number of miles away from the original location the ship flies horizontally
+    *  @param y the number of feet away from the original location the ship flies vertically
+    *  @return whether or not the ship is airborne
+    */
     public boolean fly(int x, int y) {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -171,11 +217,11 @@ public class Alien implements Contract {
             System.out.print("The alien decides to fly the mothership to a location " + x + " mile to the left of her original destination ");
         }
         if (y == 1) {
-            System.out.println("and " + y + " mile into the air.");
+            System.out.println("and " + y + " foot into the air.");
             airborne = true;
         }
         if (y > 1) {
-            System.out.println("and " + y + " miles into the air.");
+            System.out.println("and " + y + " feet into the air.");
             airborne = true;
         }
         if (y == 0) {
@@ -187,6 +233,10 @@ public class Alien implements Contract {
         return airborne;
     }
 
+    /** 
+    *  Shrink the size of the alien and her aircraft by half
+    *  @return the size of the aircraft
+    */
     public Number shrink() {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -202,6 +252,10 @@ public class Alien implements Contract {
         return this.size;
     }
 
+    /** 
+    *  Grow the size of the alien and her aircraft by x2
+    *  @return the size of the aircraft
+    */
     public Number grow() {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -217,6 +271,10 @@ public class Alien implements Contract {
         return this.size;
     }
 
+    /** 
+    *  Make the alien disembark her aircraft
+    *  @return the fact that the alien is no longer inside her ship
+    */
     public boolean disembark() {
         if (asleep == true) {
             throw new RuntimeException("The alien cannot perform any functions while she is still asleep.");
@@ -235,6 +293,10 @@ public class Alien implements Contract {
         return insideShip;
     }
 
+    /** 
+    *  Make the alien embark her aircraft
+    *  @return the fact that the alien is back inside her ship
+    */
     public boolean embark() {
         if (walking == true) {
             throw new RuntimeException("The alien is on a mission, walking with no end in sight. She must stop walking before she can board her aircraft.");
@@ -247,6 +309,9 @@ public class Alien implements Contract {
         return insideShip;
     }
 
+    /** 
+    *  Make the alien rest
+    */
     public void rest() {
         if (height == 0) {
             System.out.println("Since the aircraft is already on the ground, the alien just turns off the headlights and tucks into her convenient cot next to her control chair.");
@@ -260,6 +325,9 @@ public class Alien implements Contract {
         asleep = true;
     }
 
+    /** 
+    *  Make the alien wake up
+    */
     public void wakeUp() {
         if (asleep == true) {
             System.out.println("The alien wakes up from her slumber, well-rested and ready to slay the day.");
@@ -270,6 +338,9 @@ public class Alien implements Contract {
         asleep = false;
     }
 
+    /** 
+    *  Undo everything done to the alien since the beginning
+    */
     public void undo() {
         System.out.println("The alien pulls out her time gun from her handy dandy pouch that everyone from her species has. She aims it at her head and pulls the trigger. When she comes to, she is seated in her control chair, in her aircraft, which is on the ground. All of the items she may have stashed in her ship are gone as well. Has she returned to the beginning?");
         size = 1;

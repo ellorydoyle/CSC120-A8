@@ -10,4 +10,4 @@ Undoing brings her back to her original state.
 - I implemented stopWalking(), disembark(), embark(), and wakeUp().
 
 - What worked, what didn't, what advice would you give someone taking this course in the future?
-- It took me a long time to consider what should and shouldn't be doable at certain points for the alien, and trying to keep things from crashing or slipping by was really difficult. I would map everything out next time before I start working.
+- It took me a long time to consider what should and shouldn't be doable at certain points for the alien, and trying to keep things from crashing or slipping by was really difficult. I would map everything out next time before I start working. I would also seperate some of these methods into different classes.
